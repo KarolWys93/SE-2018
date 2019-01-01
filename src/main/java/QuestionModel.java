@@ -1,17 +1,20 @@
 public class QuestionModel implements IQuestionModel {
 
+    private int questionID;
     private String question;
     private String[] answers;
     private int selectedAnswer;
 
-    public QuestionModel(String question, String[] answers){
+    public QuestionModel(int id, String question, String[] answers){
+        this.questionID = id;
         this.question = question;
         this.answers = answers;
         this.selectedAnswer = -1;
     }
 
-    public void setSelectedAnswer(int selectedAnswer) {
-        this.selectedAnswer = selectedAnswer;
+    @Override
+    public int getQuestionID() {
+        return questionID;
     }
 
     @Override
@@ -28,4 +31,10 @@ public class QuestionModel implements IQuestionModel {
     public int selectedAnswer() {
         return selectedAnswer;
     }
+
+    @Override
+    public void setSelectedAnswer(int selectedAnswer) {
+        this.selectedAnswer = selectedAnswer;
+    }
+
 }
