@@ -56,8 +56,4 @@ public class MainFrame extends JFrame {
         questionScreen.setQuestionModel(ucModelGenerator.getNextQuestion());
         setContentPane(questionsPanel);
     }
-
-
-
-
 }

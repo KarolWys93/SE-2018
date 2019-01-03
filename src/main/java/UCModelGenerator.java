@@ -1,14 +1,18 @@
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Stack;
 
 public class UCModelGenerator implements IFormController {
 
     private MicroControllerModel ucModel;
 
+
+
+    //"questions tree"
     private HashMap<Integer, QuestionRule> questionRules;
     private HashMap<Integer, IQuestionModel> questions;
-    private List<Integer> usedQuestionIDs;
+    private Stack<Integer> usedQuestionIDs;
+
 
     public UCModelGenerator(List<IQuestionModel> questions, List<QuestionRule> rules){
         this.questions = new HashMap<>();
@@ -21,13 +25,15 @@ public class UCModelGenerator implements IFormController {
             this.questionRules.put(rule.getQuestionID(), rule);
         }
 
-        this.usedQuestionIDs = new ArrayList<>();
+        this.usedQuestionIDs = new Stack<>();
     }
 
 
 
 
 
+
+    @Override
     public void setAnswerForLastQuestion(int answer){
         questions.get(usedQuestionIDs.get(usedQuestionIDs.size()-1)).setSelectedAnswer(answer);
     }
@@ -36,14 +42,14 @@ public class UCModelGenerator implements IFormController {
     public IQuestionModel getNextQuestion() {
         IQuestionModel nextQuestion = null;
         if (usedQuestionIDs.isEmpty()){
-            usedQuestionIDs.add(0);
+            usedQuestionIDs.push(0);
             nextQuestion = questions.get(0);
         } else {
-            int lastQuestionID = usedQuestionIDs.get(usedQuestionIDs.size()-1);
+            int lastQuestionID = usedQuestionIDs.peek();
             int lastQuestionAnswer = questions.get(lastQuestionID).selectedAnswer();
             int nextQuestionID = questionRules.get(lastQuestionID).getNextQuestionID(lastQuestionAnswer);
             if (nextQuestionID != -1) {
-                usedQuestionIDs.add(nextQuestionID);
+                usedQuestionIDs.push(nextQuestionID);
                 nextQuestion = questions.get(nextQuestionID);
             }
         }
@@ -55,10 +61,9 @@ public class UCModelGenerator implements IFormController {
         if (usedQuestionIDs.size() < 2){
             return null;
         }
-        int lastQuestionID = usedQuestionIDs.get(usedQuestionIDs.size()-1);
+        int lastQuestionID = usedQuestionIDs.pop();
         questions.get(lastQuestionID).setSelectedAnswer(-1);    //remove selection from question
-        usedQuestionIDs.remove(usedQuestionIDs.size()-1);
-        lastQuestionID = usedQuestionIDs.get(usedQuestionIDs.size()-1);
+        lastQuestionID = usedQuestionIDs.peek();
         return questions.get(lastQuestionID);
     }
 }
