@@ -1,6 +1,10 @@
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainFrame extends JFrame {
 
@@ -26,7 +30,27 @@ public class MainFrame extends JFrame {
         questionRules.add(new QuestionRule(1, new int[]{2, 2, 2}));
         questionRules.add(new QuestionRule(2, new int[]{-1, -1, -1, -1}));
 
-        ucModelGenerator = new UCModelGenerator(questions, questionRules);
+        String json = "[" +
+                "  {" +
+                "    \"rule_id\": 1," +
+                "    \"rules\" : {" +
+                "      \"external_flash\" : [true, true, false]," +
+                "      \"flash_size\" : [1, 5, 0, 12]" +
+                "    }" +
+                "  }," +
+                "  {" +
+                "    \"rule_id\": 2," +
+                "    \"rules\" : {" +
+                "      \"red\" : [0, 1, 2, 3]," +
+                "      \"green\" : [true, false]" +
+                "    }" +
+                "  }" +
+                "]";
+
+        Gson gson = new Gson();
+        List<MicroControllerModelRule> modelRules = gson.fromJson(json, new TypeToken<List<MicroControllerModelRule>>() {}.getType());
+
+        ucModelGenerator = new UCModelGenerator(questions, questionRules, modelRules);
 
         StartScreen startScreen = new StartScreen();
         startPanel = startScreen.getStartPanel();

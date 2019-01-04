@@ -14,4 +14,5 @@ repositories {
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
     compile group: 'com.intellij', name: 'forms_rt', version: '7.0.3'
+    implementation 'com.google.code.gson:gson:2.8.4'
 }

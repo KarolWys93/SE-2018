@@ -1,5 +1,6 @@
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 import java.util.Stack;
 
 public class UCModelGenerator implements IFormController {
@@ -13,22 +14,47 @@ public class UCModelGenerator implements IFormController {
     private HashMap<Integer, IQuestionModel> questions;
     private Stack<Integer> usedQuestionIDs;
 
+    private HashMap<Integer, MicroControllerModelRule> modelRules;
 
-    public UCModelGenerator(List<IQuestionModel> questions, List<QuestionRule> rules){
+
+    public UCModelGenerator(List<IQuestionModel> questions, List<QuestionRule> questionTree, List<MicroControllerModelRule> modelRules){
+        ucModel = new MicroControllerModel();
+
         this.questions = new HashMap<>();
         for (IQuestionModel question:questions){
             this.questions.put(question.getQuestionID(), question);
         }
 
         this.questionRules = new HashMap<>();
-        for (QuestionRule rule:rules) {
+        for (QuestionRule rule:questionTree) {
             this.questionRules.put(rule.getQuestionID(), rule);
         }
 
         this.usedQuestionIDs = new Stack<>();
+
+        assert validateModelRules(modelRules, ucModel);
+        this.modelRules = new HashMap<>();
+        for (MicroControllerModelRule rule:modelRules) {
+            this.modelRules.put(rule.getRule_id(), rule);
+        }
     }
 
 
+    boolean validateModelRules(List<MicroControllerModelRule> modelRules, MicroControllerModel model){
+        Set<String> flags = model.parametersFlags.keySet();
+        Set<String> values = model.parametersValues.keySet();
+
+        for (MicroControllerModelRule rule:modelRules) {
+            Set<String> properties = rule.getRules().keySet();
+            for (String property:properties) {
+                if (!(flags.contains(property) || values.contains(property))){
+                    System.err.println("Property \"" + property + "\" in rule " + rule.getRule_id() + " is unknown");
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 
 
 
