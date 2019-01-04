@@ -57,6 +57,28 @@ public class UCModelGenerator implements IFormController {
     }
 
 
+    public MicroControllerModel generateModel(){
+
+        for (Integer questionID:usedQuestionIDs) {
+
+            MicroControllerModelRule rule = modelRules.get(questionID);
+            if (rule == null) continue;
+            IQuestionModel question = questions.get(questionID);
+
+            for (String property : rule.getRules().keySet()) {
+                if (ucModel.parametersValues.keySet().contains(property)) {
+                    ucModel.parametersValues.put(property, ((Double) rule.getRules().get(property)[question.selectedAnswer()]).intValue());
+                }
+                if (ucModel.parametersFlags.keySet().contains(property)) {
+                    ucModel.parametersFlags.put(property, (Boolean) rule.getRules().get(property)[question.selectedAnswer()]);
+                }
+            }
+        }
+
+
+        return ucModel;
+    }
+
 
 
     @Override
