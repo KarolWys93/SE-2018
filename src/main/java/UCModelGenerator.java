@@ -40,7 +40,7 @@ public class UCModelGenerator implements IFormController {
     }
 
 
-    boolean validateModelRules(List<MicroControllerModelRule> modelRules, MicroControllerModel model){
+    private boolean validateModelRules(List<MicroControllerModelRule> modelRules, MicroControllerModel model){
         Set<String> flags = model.parametersFlags.keySet();
         Set<String> values = model.parametersValues.keySet();
 

@@ -5,8 +5,8 @@ public class QuestionModel implements IQuestionModel {
     private String[] answers;
     private int selectedAnswer;
 
-    public QuestionModel(int id, String question, String[] answers){
-        this.questionID = id;
+    public QuestionModel(int questionID, String question, String[] answers){
+        this.questionID = questionID;
         this.question = question;
         this.answers = answers;
         this.selectedAnswer = -1;

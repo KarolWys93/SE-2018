@@ -28,6 +28,7 @@ public class MicroControllerModel {
     public final static String UART_INTERFACES = "uart_interfaces";
     public final static String USB_INTERFACES = "usb_interfaces";
     public final static String CAN_INTERFACES = "can_interfaces";
+    public final static String COUNTERS = "counters";
 
     //flags
     public final static String SMALL_SERIES = "small_series";
@@ -53,6 +54,8 @@ public class MicroControllerModel {
         parametersValues.put(MANUFACTURER,  0);
         parametersValues.put(UC_PACKAGE, PACKAGE_THT);
         parametersFlags.put(SMALL_SERIES, true);
+
+        parametersValues.put(COUNTERS, 0);
 
         //performance
         parametersValues.put(RAM_SIZE, 0);
@@ -92,7 +95,6 @@ public class MicroControllerModel {
         //other
         parametersFlags.put(GRAPHICS_FEATURES, false);
         parametersFlags.put(OS_SUPPORT, false);
-        parametersFlags.put(HARD_ENV, false);
 
     }
 
