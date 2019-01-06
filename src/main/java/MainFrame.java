@@ -16,7 +16,6 @@ public class MainFrame extends JFrame {
     private QuestionScreen questionScreen;
 
     private List<IQuestionModel> questions;
-    private ArrayList<QuestionRule> questionRules;
     private List<MicroControllerModelRule> modelRules;
 
     private UCModelGenerator ucModelGenerator;
@@ -24,17 +23,7 @@ public class MainFrame extends JFrame {
         super(title);
         loadKnowledgeBase();
 
-
-//        questions = new ArrayList<>();
-//        questions.add(new QuestionModel(0, "1 + 2 = 3?", new String[]{"Tak", "Nie"}));
-//        questions.add(new QuestionModel(1,"1 jest mniejsze od 2?", new String[]{"Tak", "Nie", "Nie wiem"}));
-//        questions.add(new QuestionModel(2,"Baba wielkanocna to?", new String[]{"Taboret", "Macarena", "Nie wiem", "Baba"}));
-        questionRules = new ArrayList<>();
-        questionRules.add(new QuestionRule(0, new int[]{1, 2}));
-        questionRules.add(new QuestionRule(1, new int[]{2, 2, 2}));
-        questionRules.add(new QuestionRule(2, new int[]{-1, -1, -1, -1}));
-
-        ucModelGenerator = new UCModelGenerator(questions, questionRules, modelRules);
+        ucModelGenerator = new UCModelGenerator(questions, modelRules);
 
         StartScreen startScreen = new StartScreen();
         startPanel = startScreen.getStartPanel();

@@ -5,7 +5,8 @@
     "answers" : [
       "komercyjny",
       "hobbystyczny"
-    ]
+    ],
+    "nextQuestionIds" : [1, 2]
   },
   {
     "questionID" : 1,
@@ -13,7 +14,8 @@
     "answers" : [
       "produkcja małoseryjna (kilka, kilkanaście urządzeń)",
       "produkcja wielkoseryjna (setki sztuk)"
-    ]
+    ],
+    "nextQuestionIds" : [2, 2]
   },
   {
     "questionID" : 2,
@@ -23,7 +25,8 @@
       "nie więcej niż 15",
       "nie więcej niż 20",
       "więcej niż 20"
-    ]
+    ],
+    "nextQuestionIds" : [3, 3, 3, 3]
   },
   {
     "questionID" : 3,
@@ -31,7 +34,8 @@
     "answers" : [
       "tak",
       "nie"
-    ]
+    ],
+    "nextQuestionIds" : [4, 4]
   },
   {
     "questionID" : 4,
@@ -41,7 +45,8 @@
       "nie więcej niż 2",
       "nie więcej niż 3",
       "więcej niż 3"
-    ]
+    ],
+    "nextQuestionIds" : [5, 5, 5, 5]
   },
   {
     "questionID" : 5,
@@ -50,7 +55,8 @@
       "nie potrzebuję wcale",
       "mniej niż 4",
       "5 i więcej"
-    ]
+    ],
+    "nextQuestionIds" : [8, 6, 6]
   },
   {
     "questionID" : 6,
@@ -60,7 +66,8 @@
       "nie większe niż 10 kHz",
       "nie większe niż 20 kHz",
       "większe niż 20 kHz"
-    ]
+    ],
+    "nextQuestionIds" : [7, 7, 7, 7]
   },
   {
     "questionID" : 7,
@@ -70,7 +77,8 @@
       "10 bit",
       "12 bit",
       "więcej niż 12 bit"
-    ]
+    ],
+    "nextQuestionIds" : [8, 8, 8, 8]
   },
   {
     "questionID" : 8,
@@ -79,7 +87,8 @@
       "nie potrzebuję wcale",
       "mniej niż 4",
       "5 i więcej"
-    ]
+    ],
+    "nextQuestionIds" : [10, 9, 9]
   },
   {
     "questionID" : 9,
@@ -97,7 +106,8 @@
     "answers" : [
       "z sieci (zasilanie nie stanowi problemu)",
       "zasilanie bateryjne/akumulatorowe (konieczność oszczędzania energii)"
-    ]
+    ],
+    "nextQuestionIds" : [11, 11]
   },
   {
     "questionID" : 11,
@@ -106,16 +116,18 @@
       "1.5 V",
       "3.3 V",
       "5 V"
-    ]
+    ],
+    "nextQuestionIds" : [12, 12, 12]
   },
   {
     "questionID" : 12,
-    "question" : "Do jakiego poziomu maksymalnie może spaść napięcie zasilania?\t (sens przy zasilaniu bateryjnym)",
+    "question" : "Do jakiego poziomu maksymalnie może spaść napięcie zasilania?",
     "answers" : [
       "1.0 V",
       "3.0 V",
       "4.5 V"
-    ]
+    ],
+    "nextQuestionIds" : [13, 13, 13]
   },
   {
     "questionID" : 13,
@@ -123,7 +135,8 @@
     "answers" : [
       "tak",
       "nie"
-    ]
+    ],
+    "nextQuestionIds" : [14, 14]
   },
   {
     "questionID" : 14,
@@ -131,7 +144,8 @@
     "answers" : [
       "tak",
       "nie"
-    ]
+    ],
+    "nextQuestionIds" : [15, 15]
   },
   {
     "questionID" : 15,
@@ -139,7 +153,8 @@
     "answers" : [
       "tak",
       "nie"
-    ]
+    ],
+    "nextQuestionIds" : [16, 16]
   },
   {
     "questionID" : 16,
@@ -147,7 +162,8 @@
     "answers" : [
       "tak",
       "nie"
-    ]
+    ],
+    "nextQuestionIds" : [17, 17]
   },
   {
     "questionID" : 17,
@@ -156,7 +172,8 @@
       "nie",
       "tak, lecz będzie to prosty, statyczny interfejs graficzny",
       "rozbudowany interfejs użytkownika"
-    ]
+    ],
+    "nextQuestionIds" : [18, 18, 18]
   },
   {
     "questionID" : 18,
@@ -166,7 +183,8 @@
       "b",
       "c",
       "d"
-    ]
+    ],
+    "nextQuestionIds" : [19, 19, 19, 19]
   },
   {
     "questionID" : 19,
@@ -174,7 +192,8 @@
     "answers" : [
       "tak",
       "nie"
-    ]
+    ],
+    "nextQuestionIds" : [20, 20]
   },
   {
     "questionID" : 20,
@@ -184,7 +203,8 @@
       "b",
       "c",
       "d"
-    ]
+    ],
+    "nextQuestionIds" : [21, 21, 21, 21]
   },
   {
     "questionID" : 21,
@@ -192,7 +212,8 @@
     "answers" : [
       "tak",
       "nie"
-    ]
+    ],
+    "nextQuestionIds" : [22, 22]
   },
   {
     "questionID" : 22,
@@ -202,7 +223,8 @@
       "1",
       "2",
       "więcej"
-    ]
+    ],
+    "nextQuestionIds" : [23, 23, 23, 23]
   },
   {
     "questionID" : 23,
@@ -212,7 +234,8 @@
       "1",
       "2",
       "więcej"
-    ]
+    ],
+    "nextQuestionIds" : [24, 24, 24, 24]
   },
   {
     "questionID" : 24,
@@ -222,7 +245,8 @@
       "1",
       "2",
       "więcej"
-    ]
+    ],
+    "nextQuestionIds" : [25, 25, 25, 25]
   },
   {
     "questionID" : 25,
@@ -232,7 +256,8 @@
       "1",
       "2",
       "więcej"
-    ]
+    ],
+    "nextQuestionIds" : [26, 26, 26, 26]
   },
   {
     "questionID" : 26,
@@ -242,7 +267,8 @@
       "1",
       "2",
       "więcej"
-    ]
+    ],
+    "nextQuestionIds" : [27, 27, 27, 27]
   },
   {
     "questionID" : 27,
@@ -250,7 +276,8 @@
     "answers" : [
       "powierzchniowy",
       "przewlekany"
-    ]
+    ],
+    "nextQuestionIds" : [28, 29]
   },
   {
     "questionID" : 28,
@@ -259,7 +286,8 @@
       "mogę używać tylko układów w prostych obudowach SMD",
       "obudowy QFN nie stanowią problemu",
       "obudowy typu BGA mogą być używane bez przeszkód"
-    ]
+    ],
+    "nextQuestionIds" : [29, 29, 29]
   },
   {
     "questionID" : 29,
@@ -267,7 +295,8 @@
     "answers" : [
       "tak",
       "nie"
-    ]
+    ],
+    "nextQuestionIds" : [30, 30]
   },
   {
     "questionID" : 30,
@@ -275,7 +304,8 @@
     "answers" : [
       "tak",
       "nie"
-    ]
+    ],
+    "nextQuestionIds" : [31, 31]
   },
   {
     "questionID" : 31,
@@ -283,6 +313,7 @@
     "answers" : [
       "tak",
       "nie"
-    ]
+    ],
+    "nextQuestionIds" : [-1, -1]
   }
 ]

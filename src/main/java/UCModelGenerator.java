@@ -7,27 +7,19 @@ public class UCModelGenerator implements IFormController {
 
     private MicroControllerModel ucModel;
 
-
-
-    //"questions tree"
-    private HashMap<Integer, QuestionRule> questionRules;
+    //"questions"
     private HashMap<Integer, IQuestionModel> questions;
     private Stack<Integer> usedQuestionIDs;
 
     private HashMap<Integer, MicroControllerModelRule> modelRules;
 
 
-    public UCModelGenerator(List<IQuestionModel> questions, List<QuestionRule> questionTree, List<MicroControllerModelRule> modelRules){
+    public UCModelGenerator(List<IQuestionModel> questions, List<MicroControllerModelRule> modelRules){
         ucModel = new MicroControllerModel();
 
         this.questions = new HashMap<>();
         for (IQuestionModel question:questions){
             this.questions.put(question.getQuestionID(), question);
-        }
-
-        this.questionRules = new HashMap<>();
-        for (QuestionRule rule:questionTree) {
-            this.questionRules.put(rule.getQuestionID(), rule);
         }
 
         this.usedQuestionIDs = new Stack<>();
@@ -94,8 +86,7 @@ public class UCModelGenerator implements IFormController {
             nextQuestion = questions.get(0);
         } else {
             int lastQuestionID = usedQuestionIDs.peek();
-            int lastQuestionAnswer = questions.get(lastQuestionID).selectedAnswer();
-            int nextQuestionID = questionRules.get(lastQuestionID).getNextQuestionID(lastQuestionAnswer);
+            int nextQuestionID = questions.get(lastQuestionID).getNextQuestionID();
             if (nextQuestionID != -1) {
                 usedQuestionIDs.push(nextQuestionID);
                 nextQuestion = questions.get(nextQuestionID);

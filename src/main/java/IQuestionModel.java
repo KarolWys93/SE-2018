@@ -5,5 +5,5 @@ public interface IQuestionModel {
     String[] getAnswers();
     int selectedAnswer();
     void setSelectedAnswer(int selectedAnswer);
-
+    int getNextQuestionID();
 }
