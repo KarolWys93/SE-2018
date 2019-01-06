@@ -7,11 +7,7 @@ public class MicroControllerModel {
     public final static int PACKAGE_ADVANCED_SMD = 4;
     public final static int PACKAGE_BGA = 8;
 
-    public final static int MANUFACTURER_ATMEL = 1;
-    public final static int MANUFACTURER_STM = 2;
-
     //values
-    public final static String MANUFACTURER = "manufacturer";
     public final static String UC_PACKAGE = "package";
     public final static String FLASH_SIZE = "flash_size";
     public final static String RAM_SIZE = "ram_size";
@@ -31,6 +27,8 @@ public class MicroControllerModel {
     public final static String COUNTERS = "counters";
 
     //flags
+    public final static String MANUFACTURER_ATMEL = "manufacturer_ATMEL";
+    public final static String MANUFACTURER_STM = "manufacturer_STM";
     public final static String SMALL_SERIES = "small_series";
     public final static String EXTERNAL_FLASH = "external_flash";
     public final static String EXTERNAL_RAM = "external_ram";
@@ -40,7 +38,6 @@ public class MicroControllerModel {
     public final static String POWER_SAVING = "power_saving";
     public final static String GRAPHICS_FEATURES = "graphics_features";
     public final static String OS_SUPPORT = "os_support";
-    public final static String HARD_ENV = "hard_env";
 
 
     public HashMap<String, Boolean> parametersFlags;
@@ -51,7 +48,9 @@ public class MicroControllerModel {
         parametersValues = new HashMap<>();
 
         //main
-        parametersValues.put(MANUFACTURER,  0);
+        parametersFlags.put(MANUFACTURER_ATMEL,  false);
+        parametersFlags.put(MANUFACTURER_STM, false);
+
         parametersValues.put(UC_PACKAGE, PACKAGE_THT);
         parametersFlags.put(SMALL_SERIES, true);
 
@@ -98,4 +97,11 @@ public class MicroControllerModel {
 
     }
 
+    @Override
+    public String toString() {
+        return "MicroControllerModel{\n\r" +
+                "\tparametersFlags=" + parametersFlags + ",\n\r" +
+                "\tparametersValues=" + parametersValues + "\n\r" +
+                '}';
+    }
 }

@@ -6,7 +6,7 @@ public class QuestionModel implements IQuestionModel {
     private int selectedAnswer;
     private int[] nextQuestionIds;
 
-    public QuestionModel(int questionID, String question, String[] answers, int[] nextQuestionIds){
+    public QuestionModel(int questionID, String question, String[] answers, int[] nextQuestionIds) {
         this.questionID = questionID;
         this.question = question;
         this.answers = answers;
@@ -40,12 +40,11 @@ public class QuestionModel implements IQuestionModel {
     }
 
     @Override
-    public int getNextQuestionID(){
-        if (selectedAnswer < nextQuestionIds.length && selectedAnswer != -1){
+    public int getNextQuestionID() {
+        if (selectedAnswer < nextQuestionIds.length && selectedAnswer != -1) {
             return nextQuestionIds[selectedAnswer];
-        }else {
+        } else {
             return -1;
         }
     }
-
 }

@@ -58,6 +58,11 @@ public class UCModelGenerator implements IFormController {
             IQuestionModel question = questions.get(questionID);
 
             for (String property : rule.getRules().keySet()) {
+                if (rule.getRules().get(property)[question.selectedAnswer()] == null){
+                    System.out.println("Nothing to change, skip");
+                    continue;
+                }
+
                 if (ucModel.parametersValues.keySet().contains(property)) {
                     ucModel.parametersValues.put(property, ((Double) rule.getRules().get(property)[question.selectedAnswer()]).intValue());
                 }

@@ -1,0 +1,197 @@
+[
+  {
+    "rule_id": 0,
+    "rules" : {
+      "small_series" : [null, true]
+    }
+  },
+  {
+    "rule_id": 1,
+    "rules" : {
+      "small_series" : [true, false]
+    }
+  },
+  {
+    "rule_id": 2,
+    "rules" : {
+      "IO_ports" : [5, 15, 20, -1]
+    }
+  },
+  {
+    "rule_id": 3,
+    "rules" : {
+      "IO_expanders" : [true, false]
+    }
+  },
+  {
+    "rule_id": 4,
+    "rules" : {
+      "counters" : [0, 2, 3, -1]
+    }
+  },
+  {
+    "rule_id": 5,
+    "rules" : {
+      "number_of_adc" : [0, 4, -1]
+    }
+  },
+  {
+    "rule_id": 6,
+    "rules" : {
+      "adc_freq" : [0, 10000, 20000, -1]
+    }
+  },
+  {
+    "rule_id": 7,
+    "rules" : {
+      "adc_resolution" : [8, 19, 12, -1]
+    }
+  },
+  {
+    "rule_id": 8,
+    "rules" : {
+      "number_of_dac" : [0, 4, -1]
+    }
+  },
+  {
+    "rule_id": 9,
+    "rules" : {
+      "dac_resolution" : [8, 10, 12, -1]
+    }
+  },
+  {
+    "rule_id": 10,
+    "rules" : {
+      "power_saving" : [false, true]
+    }
+  },
+  {
+    "rule_id": 11,
+    "rules" : {
+      "optimal_voltage" : [1500, 3300, 5000]
+    }
+  },
+  {
+    "rule_id": 12,
+    "rules" : {
+      "minimal_voltage" : [1000, 3000, 4500]
+    }
+  },
+  {
+    "rule_id": 13,
+    "rules" : {
+      "os_support" : [true, false]
+    }
+  },
+  {
+    "rule_id": 14,
+    "rules" : {
+      "high_performance" : [true, false]
+    }
+  },
+  {
+    "rule_id": 15,
+    "rules" : {
+      "high_performance" : [true, null],
+      "fpu" : [true, false]
+    }
+  },
+  {
+    "rule_id": 16,
+    "rules" : {
+      "high_performance" : [true, null]
+    }
+  },
+  {
+    "rule_id": 17,
+    "rules" : {
+      "high_performance" : [null, null, true],
+      "graphics_features" : [false, false, true]
+    }
+  },
+  {
+    "rule_id": 18,
+    "rules" : {
+      "ram_size" : [null, null, null, null]
+    }
+  },
+  {
+    "rule_id": 19,
+    "rules" : {
+      "external_ram" : [true, false]
+    }
+  },
+  {
+    "rule_id": 20,
+    "rules" : {
+      "flash_size" : [null, null, null, null]
+    }
+  },
+  {
+    "rule_id": 21,
+    "rules" : {
+      "external_flash" : [true, false]
+    }
+  },
+  {
+    "rule_id": 22,
+    "rules" : {
+      "uart_interfaces" : [0, 1, 2, -1]
+    }
+  },
+  {
+    "rule_id": 23,
+    "rules" : {
+      "i2c_interfaces" : [0, 1, 2, -1]
+    }
+  },
+  {
+    "rule_id": 24,
+    "rules" : {
+      "can_interfaces" : [0, 1, 2, -1]
+    }
+  },
+  {
+    "rule_id": 25,
+    "rules" : {
+      "spi_interfaces" : [0, 1, 2, -1]
+    }
+  },
+  {
+    "rule_id": 26,
+    "rules" : {
+      "usb_interfaces" : [0, 1, 2, -1]
+    }
+  },
+  {
+    "rule_id": 27,
+    "rules" : {
+      "package" : [null, 1]
+    }
+  },
+  {
+    "rule_id": 28,
+    "rules" : {
+      "package" : [2, 4, 8]
+    }
+  },
+  {
+    "rule_id": 29,
+    "rules" : {
+      "manufacturer_ATMEL" : [true, false]
+    }
+  },
+  {
+    "rule_id": 30,
+    "rules": {
+      "manufacturer_STM": [true, false]
+    }
+  },
+  {
+    "rule_id": 31,
+    "rules" : {
+      "manufacturer_ATMEL" : [true, null],
+      "manufacturer_STM" : [true, null]
+    }
+  }
+]

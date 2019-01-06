@@ -24,6 +24,7 @@ public class MainFrame extends JFrame {
         loadKnowledgeBase();
 
         ucModelGenerator = new UCModelGenerator(questions, modelRules);
+        System.out.println(ucModelGenerator.generateModel().toString());
 
         StartScreen startScreen = new StartScreen();
         startPanel = startScreen.getStartPanel();
@@ -39,7 +40,11 @@ public class MainFrame extends JFrame {
             }else {
                 question = ucModelGenerator.getPreviousQuestion();
             }
-            if(question != null) questionScreen.setQuestionModel(question);
+            if(question != null){
+                questionScreen.setQuestionModel(question);
+            }else{
+                System.out.println(ucModelGenerator.generateModel().toString());
+            }
         });
 
 
@@ -47,26 +52,8 @@ public class MainFrame extends JFrame {
     }
 
     private void loadKnowledgeBase(){
-        String json = "[" +
-                "  {" +
-                "    \"rule_id\": 1," +
-                "    \"rules\" : {" +
-                "      \"external_flash\" : [true, true, false]," +
-                "      \"flash_size\" : [1, 5, 0, 12]" +
-                "    }" +
-//                "  }," +
-//                "  {" +
-//                "    \"rule_id\": 2," +
-//                "    \"rules\" : {" +
-//                "      \"red\" : [0, 1, 2, 3]," +
-//                "      \"green\" : [true, false]" +
-//                "    }" +
-                "  }" +
-                "]";
-
 
         Gson gson = new Gson();
-        modelRules = gson.fromJson(json, new TypeToken<List<MicroControllerModelRule>>() {}.getType());
 
         try(Reader reader = new URLReader(MainFrame.class.getResource("/questions.json"))) {
             questions = gson.fromJson(reader, new TypeToken<List<QuestionModel>>() {}.getType());
@@ -75,6 +62,14 @@ public class MainFrame extends JFrame {
         }
 
         questions.forEach(questionModel -> questionModel.setSelectedAnswer(-1));    //hack for default values
+
+
+        try(Reader reader = new URLReader(MainFrame.class.getResource("/model_rules.json"))) {
+            modelRules = gson.fromJson(reader, new TypeToken<List<MicroControllerModelRule>>() {}.getType());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
 
