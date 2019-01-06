@@ -71,8 +71,6 @@ public class UCModelGenerator implements IFormController {
                 }
             }
         }
-
-
         return ucModel;
     }
 
