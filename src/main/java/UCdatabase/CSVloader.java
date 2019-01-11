@@ -1,5 +1,6 @@
 package UCdatabase;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -51,14 +52,12 @@ public class CSVloader {
         Map<String, Integer> headers;
         try {
             Stream<String> lines = Files.lines(filePath);
-//            headers = parseHeader(lines.iterator().next());
             Iterator<String> iterator = lines.iterator();
             headers = parseHeader(iterator.next());
 
             iterator.forEachRemaining(s -> {
 
-//            lines.skip(1).forEach(s -> {
-                String[] fields = fixSplitForString(s.split(","));
+                String[] fields = fixSplitForStringWithComa(s.split(","));
                 MicroControllerEntity ucEntity = new MicroControllerEntity(
                         fields[headers.get(MANUFACTURER)],
                         fields[headers.get(PRODUCT_NAME)],
@@ -113,7 +112,7 @@ public class CSVloader {
         return headersMap;
     }
 
-    private static String[] fixSplitForString(String[] splited){
+    private static String[] fixSplitForStringWithComa(String[] splited){
         ArrayList<String> fixed = new ArrayList<>();
         int startString = -1;
 
@@ -134,20 +133,15 @@ public class CSVloader {
                 fixed.add(s);
             }
         }
-        String[] fixedArray = new String[fixed.size()];
-        for (int i = 0; i < fixedArray.length; i++) {
-            fixedArray[i] = fixed.get(i);
-        }
-        return fixedArray;
+
+        return fixed.toArray(new String[0]);
     }
 
 
     public static void main(String[] args) {
 
         Path filePath = Paths.get("pre-data/ucBase.csv");
-
         List<MicroControllerEntity> ucList = loadCSV(filePath);
-
         System.out.println(ucList);
 
     }

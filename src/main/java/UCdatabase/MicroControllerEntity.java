@@ -125,4 +125,144 @@ public class MicroControllerEntity {
                 ", package_bga=" + package_bga +
                 '}';
     }
+
+    public String getManufacturer() {
+        return manufacturer;
+    }
+
+    public String getProduct_name() {
+        return product_name;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public String getCore() {
+        return core;
+    }
+
+    public int getFlash_kb() {
+        return flash_kb;
+    }
+
+    public int getSram_bytes() {
+        return sram_bytes;
+    }
+
+    public int getPin_count() {
+        return pin_count;
+    }
+
+    public int getCpu_speed() {
+        return cpu_speed;
+    }
+
+    public int getComparators() {
+        return comparators;
+    }
+
+    public int getADC_input() {
+        return ADC_input;
+    }
+
+    public int getADC_resolution() {
+        return ADC_resolution;
+    }
+
+    public int getDAC_output() {
+        return DAC_output;
+    }
+
+    public int getDAC_resolution() {
+        return DAC_resolution;
+    }
+
+    public int getCounters() {
+        return counters;
+    }
+
+    public int getUART() {
+        return UART;
+    }
+
+    public int getSPI() {
+        return SPI;
+    }
+
+    public int getI2C() {
+        return I2C;
+    }
+
+    public int getCAN() {
+        return CAN;
+    }
+
+    public int getUSB() {
+        return USB;
+    }
+
+    public int getTemp_min() {
+        return temp_min;
+    }
+
+    public int getTemp_max() {
+        return temp_max;
+    }
+
+    public int getVoltage_min() {
+        return voltage_min;
+    }
+
+    public int getVoltage_max() {
+        return voltage_max;
+    }
+
+    public float getPower_consumption() {
+        return power_consumption;
+    }
+
+    public int getFPU() {
+        return FPU;
+    }
+
+    public int getGraphics_support() {
+        return graphics_support;
+    }
+
+    public int getExternal_ram_support() {
+        return external_ram_support;
+    }
+
+    public String getParallel_interfaces() {
+        return parallel_interfaces;
+    }
+
+    public String getSerial_interfaces() {
+        return serial_interfaces;
+    }
+
+    public String getGeneral_description() {
+        return general_description;
+    }
+
+    public String getPackages() {
+        return packages;
+    }
+
+    public int getPackage_tht() {
+        return package_tht;
+    }
+
+    public int getPackage_easy() {
+        return package_easy;
+    }
+
+    public int getPackage_hard() {
+        return package_hard;
+    }
+
+    public int getPackage_bga() {
+        return package_bga;
+    }
 }

@@ -35,3 +35,6 @@ out
 .classpath
 .project
 nullnull
+
+# Database files from project
+data/*.db

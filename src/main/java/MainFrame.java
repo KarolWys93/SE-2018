@@ -1,11 +1,17 @@
+import UCdatabase.CSVloader;
+import UCdatabase.Database;
+import UCdatabase.MicroControllerEntity;
+import UCdatabase.UCDatabaseDAO;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import jdk.nashorn.api.scripting.URLReader;
 
 import javax.swing.*;
+import javax.xml.transform.stream.StreamResult;
 import java.awt.event.ActionEvent;
 import java.io.*;
-import java.util.ArrayList;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 public class MainFrame extends JFrame {
@@ -21,6 +27,13 @@ public class MainFrame extends JFrame {
     private UCModelGenerator ucModelGenerator;
     public MainFrame(String title){
         super(title);
+        Database db = new Database();
+        db.init();
+        UCDatabaseDAO ucDao = new UCDatabaseDAO(db.getConnection());
+        List<MicroControllerEntity> list = CSVloader.loadCSV(Paths.get("./data/ucBase.csv"));
+        int addedUC = ucDao.insertAll(list);
+        System.out.println("ADDED: " + addedUC);
+        db.closeDB();
         loadKnowledgeBase();
 
         ucModelGenerator = new UCModelGenerator(questions, modelRules);
