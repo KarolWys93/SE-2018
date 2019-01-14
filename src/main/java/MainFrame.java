@@ -27,7 +27,6 @@ public class MainFrame extends JFrame {
         loadKnowledgeBase();
 
         ucModelGenerator = new UCModelGenerator(questions, modelRules);
-        System.out.println(ucModelGenerator.generateModel().toString());
 
         StartScreen startScreen = new StartScreen();
         startPanel = startScreen.getStartPanel();
@@ -40,13 +39,17 @@ public class MainFrame extends JFrame {
             IQuestionModel question = null;
             if (nextQuestion) {
                 question = ucModelGenerator.getNextQuestion();
+                if (question != null){
+                    questionScreen.setQuestionModel(question);
+                } else {
+                    System.out.println(ucModelGenerator.generateModel().toString());
+                }
+
             } else {
                 question = ucModelGenerator.getPreviousQuestion();
-            }
-            if (question != null) {
-                questionScreen.setQuestionModel(question);
-            } else {
-                System.out.println(ucModelGenerator.generateModel().toString());
+                if (question != null){
+                    questionScreen.setQuestionModel(question);
+                }
             }
         });
 

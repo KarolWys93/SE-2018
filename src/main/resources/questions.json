@@ -56,18 +56,7 @@
       "mniej niż 4",
       "5 i więcej"
     ],
-    "nextQuestionIds" : [8, 6, 6]
-  },
-  {
-    "questionID" : 6,
-    "question" : "Częstotliwość próbkowanych sygnałów?",
-    "answers" : [
-      "sygnały praktycznie stałe (pomiary napięć itd.)",
-      "nie większe niż 10 kHz",
-      "nie większe niż 20 kHz",
-      "większe niż 20 kHz"
-    ],
-    "nextQuestionIds" : [7, 7, 7, 7]
+    "nextQuestionIds" : [8, 7, 7]
   },
   {
     "questionID" : 7,
@@ -98,7 +87,8 @@
       "10 bit",
       "12 bit",
       "więcej niż 12 bit"
-    ]
+    ],
+    "nextQuestionIds" : [10, 10, 10, 10]
   },
   {
     "questionID" : 10,
@@ -204,16 +194,7 @@
       "c",
       "d"
     ],
-    "nextQuestionIds" : [21, 21, 21, 21]
-  },
-  {
-    "questionID" : 21,
-    "question" : "Czy przewidujesz użycie zewnętrznej pamięci?",
-    "answers" : [
-      "tak",
-      "nie"
-    ],
-    "nextQuestionIds" : [22, 22]
+    "nextQuestionIds" : [22, 22, 22, 22]
   },
   {
     "questionID" : 22,
@@ -261,14 +242,12 @@
   },
   {
     "questionID" : 26,
-    "question" : "Czy potrzebujesz USB? Ilu?",
+    "question" : "Czy potrzebujesz USB?",
     "answers" : [
-      "0",
-      "1",
-      "2",
-      "więcej"
+      "tak",
+      "nie"
     ],
-    "nextQuestionIds" : [27, 27, 27, 27]
+    "nextQuestionIds" : [27, 27]
   },
   {
     "questionID" : 27,

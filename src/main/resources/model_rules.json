@@ -36,12 +36,6 @@
     }
   },
   {
-    "rule_id": 6,
-    "rules" : {
-      "adc_freq" : [0, 10000, 20000, -1]
-    }
-  },
-  {
     "rule_id": 7,
     "rules" : {
       "adc_resolution" : [8, 19, 12, -1]
@@ -128,12 +122,6 @@
     }
   },
   {
-    "rule_id": 21,
-    "rules" : {
-      "external_flash" : [true, false]
-    }
-  },
-  {
     "rule_id": 22,
     "rules" : {
       "uart_interfaces" : [0, 1, 2, -1]
@@ -160,7 +148,7 @@
   {
     "rule_id": 26,
     "rules" : {
-      "usb_interfaces" : [0, 1, 2, -1]
+      "usb_interfaces" : [true, false]
     }
   },
   {
