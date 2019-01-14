@@ -2,7 +2,7 @@
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="StartScreen">
   <grid id="27dc6" binding="startPanel" layout-manager="BorderLayout" hgap="0" vgap="0">
     <constraints>
-      <xy x="16" y="27" width="3757" height="117"/>
+      <xy x="16" y="27" width="3757" height="7601"/>
     </constraints>
     <properties/>
     <border type="none"/>

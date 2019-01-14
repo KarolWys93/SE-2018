@@ -1,7 +1,5 @@
 package UCdatabase;
 
-import org.sqlite.SQLiteConnection;
-
 import java.sql.*;
 
 public class Database {
@@ -19,7 +17,7 @@ public class Database {
         }
     }
 
-    public Connection getConnection(){
+    public Connection getConnection() {
         return connection;
     }
 
@@ -74,7 +72,7 @@ public class Database {
 
         Statement statement = connection.createStatement();
         statement.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='uc_database';");
-        if (!statement.getResultSet().next()){
+        if (!statement.getResultSet().next()) {
             statement.execute(createTableStatement);
             System.out.println("Potato");
         }

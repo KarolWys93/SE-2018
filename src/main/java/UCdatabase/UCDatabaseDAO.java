@@ -3,6 +3,7 @@ package UCdatabase;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Collection;
 
 public class UCDatabaseDAO {
@@ -78,6 +79,17 @@ public class UCDatabaseDAO {
         }
 
         return resultCounter;
+    }
+
+    public int tableSize(){
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT COUNT(*) as row_numbers FROM uc_database");
+            statement.execute();
+            return statement.getResultSet().getInt("row_numbers");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 
 }
