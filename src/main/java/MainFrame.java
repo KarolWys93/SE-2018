@@ -1,3 +1,5 @@
+import UCdatabase.Database;
+import UCdatabase.MicroControllerEntity;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import jdk.nashorn.api.scripting.URLReader;
@@ -39,21 +41,39 @@ public class MainFrame extends JFrame {
             IQuestionModel question = null;
             if (nextQuestion) {
                 question = ucModelGenerator.getNextQuestion();
-                if (question != null){
+                if (question != null) {
                     questionScreen.setQuestionModel(question);
                 } else {
-                    System.out.println(ucModelGenerator.generateModel().toString());
+                    searchUC(ucModelGenerator.generateModel());
                 }
 
             } else {
                 question = ucModelGenerator.getPreviousQuestion();
-                if (question != null){
+                if (question != null) {
                     questionScreen.setQuestionModel(question);
                 }
             }
         });
 
         setContentPane(startPanel);
+    }
+
+    private void searchUC(MicroControllerModel ucModel) {
+        System.out.println(ucModel.toString());
+        Database db = new Database();
+        db.init();
+        UCModelMatcher matcher = new UCModelMatcher(db.getConnection());
+
+        List<MicroControllerEntity> ucList = matcher.matchUCModel(ucModel);
+
+        System.out.println(ucList);
+
+        JOptionPane.showMessageDialog(null,
+                "Znaleziono mikrokontrolerów: " + ucList.size(),
+                "Wynik wyszukiwania",
+                JOptionPane.INFORMATION_MESSAGE);
+
+        db.closeDB();
     }
 
 

@@ -1,10 +1,9 @@
 package UCdatabase;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 public class UCDatabaseDAO {
 
@@ -29,8 +28,8 @@ public class UCDatabaseDAO {
                             "'package_easy','package_hard','package_bga') " +
                             "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);"
             );
-            for (MicroControllerEntity uc:ucCollection) {
-                statement.setString(1, uc.getManufacturer());
+            for (MicroControllerEntity uc : ucCollection) {
+                statement.setString(1, uc.getManufacturer().toUpperCase());
                 statement.setString(2, uc.getProduct_name());
                 statement.setFloat(3, uc.getPrice());
                 statement.setString(4, uc.getCore());
@@ -46,7 +45,7 @@ public class UCDatabaseDAO {
                 statement.setInt(14, uc.getCounters());
                 statement.setInt(15, uc.getUART());
                 statement.setInt(16, uc.getSPI());
-                statement.setInt( 17, uc.getI2C());
+                statement.setInt(17, uc.getI2C());
                 statement.setInt(18, uc.getCAN());
                 statement.setInt(19, uc.getUSB());
                 statement.setInt(20, uc.getTemp_min());
@@ -74,14 +73,14 @@ public class UCDatabaseDAO {
         }
 
         int resultCounter = 0;
-        for (int result:results) {
+        for (int result : results) {
             resultCounter += result > 0 ? result : 0;
         }
 
         return resultCounter;
     }
 
-    public int tableSize(){
+    public int tableSize() {
         try {
             PreparedStatement statement = connection.prepareStatement("SELECT COUNT(*) as row_numbers FROM uc_database");
             statement.execute();
@@ -90,6 +89,55 @@ public class UCDatabaseDAO {
             e.printStackTrace();
         }
         return 0;
+    }
+
+    public static List<MicroControllerEntity> rowsToObject(ResultSet resultSet) {
+        List<MicroControllerEntity> ucList = new ArrayList<>();
+
+        try {
+            while (resultSet.next()) {
+                ucList.add(new MicroControllerEntity(
+                        resultSet.getString("manufacturer"),
+                        resultSet.getString("product_name"),
+                        resultSet.getFloat("price"),
+                        resultSet.getString("core"),
+                        resultSet.getInt("flash_kb"),
+                        resultSet.getInt("sram_bytes"),
+                        resultSet.getInt("pin_count"),
+                        resultSet.getInt("cpu_speed"),
+                        resultSet.getInt("comparators"),
+                        resultSet.getInt("ADC_input"),
+                        resultSet.getInt("ADC_resolution"),
+                        resultSet.getInt("DAC_output"),
+                        resultSet.getInt("DAC_resolution"),
+                        resultSet.getInt("counters"),
+                        resultSet.getInt("UART"),
+                        resultSet.getInt("SPI"),
+                        resultSet.getInt("I2C"),
+                        resultSet.getInt("CAN"),
+                        resultSet.getInt("USB"),
+                        resultSet.getInt("temp_min"),
+                        resultSet.getInt("temp_max"),
+                        resultSet.getInt("voltage_min"),
+                        resultSet.getInt("voltage_max"),
+                        resultSet.getFloat("power_consumption"),
+                        resultSet.getInt("FPU"),
+                        resultSet.getInt("graphics_support"),
+                        resultSet.getInt("external_ram_support"),
+                        resultSet.getString("parallel_interfaces"),
+                        resultSet.getString("serial_interfaces"),
+                        resultSet.getString("general_description"),
+                        resultSet.getString("packages"),
+                        resultSet.getInt("package_tht"),
+                        resultSet.getInt("package_easy"),
+                        resultSet.getInt("package_hard"),
+                        resultSet.getInt("package_bga")
+                ));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return ucList;
     }
 
 }
