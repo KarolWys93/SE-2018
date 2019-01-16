@@ -124,25 +124,25 @@
   {
     "rule_id": 22,
     "rules" : {
-      "uart_interfaces" : [0, 1, 2, -1]
+      "uart_interfaces" : [0, 1, 2, 3]
     }
   },
   {
     "rule_id": 23,
     "rules" : {
-      "i2c_interfaces" : [0, 1, 2, -1]
+      "i2c_interfaces" : [0, 1, 2, 3]
     }
   },
   {
     "rule_id": 24,
     "rules" : {
-      "can_interfaces" : [0, 1, 2, -1]
+      "can_interfaces" : [0, 1, 2, 3]
     }
   },
   {
     "rule_id": 25,
     "rules" : {
-      "spi_interfaces" : [0, 1, 2, -1]
+      "spi_interfaces" : [0, 1, 2, 3]
     }
   },
   {
