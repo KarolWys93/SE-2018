@@ -32,13 +32,13 @@
   {
     "rule_id": 5,
     "rules" : {
-      "number_of_adc" : [0, 4, 10, 16]
+      "number_of_adc" : [0, 1, 8, 10, 16]
     }
   },
   {
     "rule_id": 7,
     "rules" : {
-      "adc_resolution" : [8, 19, 12]
+      "adc_resolution" : [8, 10, 12]
     }
   },
   {
@@ -62,13 +62,13 @@
   {
     "rule_id": 11,
     "rules" : {
-      "optimal_voltage" : [1500, 3300, 5000]
+      "optimal_voltage" : [2400, 3300, 5000]
     }
   },
   {
     "rule_id": 12,
     "rules" : {
-      "minimal_voltage" : [1000, 3000, 4500]
+      "minimal_voltage" : [1800, 3000, 4500]
     }
   },
   {
@@ -106,7 +106,7 @@
   {
     "rule_id": 18,
     "rules" : {
-      "ram_size" : [null, null, null, null]
+      "ram_size" : [0, 1000, 4000, 32000, 64000]
     }
   },
   {
@@ -118,7 +118,7 @@
   {
     "rule_id": 20,
     "rules" : {
-      "flash_size" : [null, null, null, null]
+      "flash_size" : [0, 8, 64, 256]
     }
   },
   {

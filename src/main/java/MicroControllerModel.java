@@ -85,7 +85,7 @@ public class MicroControllerModel {
         parametersValues.put(I2C_INTERFACES, 0);
         parametersValues.put(UART_INTERFACES, 0);
         parametersValues.put(CAN_INTERFACES, 0);
-        parametersFlags.put(USB_INTERFACES, true);
+        parametersFlags.put(USB_INTERFACES, false);
 
         //other
         parametersFlags.put(GRAPHICS_FEATURES, false);

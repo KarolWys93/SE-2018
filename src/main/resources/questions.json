@@ -53,11 +53,12 @@
     "question" : "Ile kanałów ADC potrzebujesz w swoim projekcie?",
     "answers" : [
       "nie potrzebuję wcale",
-      "więcej niż 4, ale mniej niż 10",
-      "więcej niż 10, ale mniej niż 16",
+      "nie więcej niż 8",
+      "nie więcej niż 10",
+      "nie więcej niż 16",
       "więcej niż 16"
     ],
-    "nextQuestionIds" : [8, 7, 7, 7]
+    "nextQuestionIds" : [8, 7, 7, 7, 7]
   },
   {
     "questionID" : 7,
@@ -101,21 +102,21 @@
   },
   {
     "questionID" : 11,
-    "question" : "Jakim zasilaniem domyślnie będzie zasilany mikrokontroler?",
+    "question" : "Jakie będzie najwyższe napięcie zasilające mikrokontroler?",
     "answers" : [
-      "1.5 V",
-      "3.3 V",
-      "5 V"
+      "<= 2.4 V",
+      "<= 3.3 V",
+      "<= 5 V"
     ],
     "nextQuestionIds" : [12, 12, 12]
   },
   {
     "questionID" : 12,
-    "question" : "Do jakiego poziomu maksymalnie może spaść napięcie zasilania?",
+    "question" : "Jaką minimalną wartość może przybrać napięcie zasilania?",
     "answers" : [
-      "1.0 V",
-      "3.0 V",
-      "4.5 V"
+      "<= 1.8 V",
+      "<= 3.0 V",
+      "<= 4.5 V"
     ],
     "nextQuestionIds" : [13, 13, 13]
   },
@@ -167,14 +168,15 @@
   },
   {
     "questionID" : 18,
-    "question" : "Jakie będzie szacunkowe zużycie pamięci RAM w Twojej aplikacji?",
+    "question" : "Jakie będzie szacunkowe maksymalne zużycie pamięci RAM w Twojej aplikacji? (nie wliczając ewentualnego zewnętrznego ramu)",
     "answers" : [
-      "a",
-      "b",
-      "c",
-      "d"
+      "nie więcej niż 1 Kb",
+      "nie więcej niż 4 Kb",
+      "nie więcej niż 32 Kb",
+      "nie więcej niż 64 Kb",
+      "więcej niż 64 Kb"
     ],
-    "nextQuestionIds" : [19, 19, 19, 19]
+    "nextQuestionIds" : [19, 19, 19, 19, 19]
   },
   {
     "questionID" : 19,
@@ -187,12 +189,12 @@
   },
   {
     "questionID" : 20,
-    "question" : "Określ szacunkowe zużycie pamięci FLASH.",
+    "question" : "Określ jak dużo maksymalnie potrzebujesz pamięci FLASH.",
     "answers" : [
-      "a",
-      "b",
-      "c",
-      "d"
+      "nie więcej niż 8 Kb",
+      "nie więcej niż 64 Kb",
+      "nie więcej niż 256 Kb",
+      "więcej niż 256 Kb"
     ],
     "nextQuestionIds" : [22, 22, 22, 22]
   },

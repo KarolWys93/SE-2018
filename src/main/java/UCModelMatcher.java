@@ -40,6 +40,10 @@ public class UCModelMatcher {
         stringBuilder.append(prepareADCFilter(ucModel));
         stringBuilder.append(" AND ");
         stringBuilder.append(prepareDACFilter(ucModel));
+        stringBuilder.append(" AND ");
+        stringBuilder.append(prepareFlashFilter(ucModel));
+        stringBuilder.append(" AND ");
+        stringBuilder.append(prepareSramFilter(ucModel));
 
         try {
             String statementSQL = stringBuilder.toString();
@@ -135,28 +139,35 @@ public class UCModelMatcher {
     private String prepareADCFilter(MicroControllerModel ucModel) {
         int numberOfADC = ucModel.parametersValues.get(MicroControllerModel.ADC_NUMBER);
         int resolutionOfADC = ucModel.parametersValues.get(MicroControllerModel.ADC_RESOLUTION);
-        String preparedSQL;
-
-        if (numberOfADC > 0) {
-            preparedSQL = String.format(" ( ADC_input >= %d AND ADC_resolution >= %d ) ", numberOfADC, resolutionOfADC);
-        } else {
-            preparedSQL = " ( ADC_input >= 0 ) ";
-        }
-
-        return preparedSQL;
+        return String.format(" ( ADC_input >= %d AND ADC_resolution >= %d ) ", numberOfADC, resolutionOfADC);
     }
 
-    private String prepareDACFilter(MicroControllerModel ucModel){
+    private String prepareDACFilter(MicroControllerModel ucModel) {
         int numberOfDAC = ucModel.parametersValues.get(MicroControllerModel.DAC_NUMBER);
         int resolutionOfDAC = ucModel.parametersValues.get(MicroControllerModel.DAC_RESOLUTION);
         String preparedSQL;
 
-        if (numberOfDAC >= 1 && (resolutionOfDAC > 0 )) {
+        if (numberOfDAC >= 1 && (resolutionOfDAC > 0)) {
             preparedSQL = String.format(" ( DAC_output >= %d AND DAC_resolution >= %d ) ", numberOfDAC, resolutionOfDAC);
         } else {
             preparedSQL = " ( DAC_output >= 0 ) ";
         }
 
+        return preparedSQL;
+    }
+
+    private String prepareFlashFilter(MicroControllerModel ucModel) {
+        return String.format(" ( flash_kb >= %d ) ", ucModel.parametersValues.get(MicroControllerModel.FLASH_SIZE));
+    }
+
+    private String prepareSramFilter(MicroControllerModel ucModel) {
+        String preparedSQL;
+        int ramUsage = ucModel.parametersValues.get(MicroControllerModel.RAM_SIZE);
+        if (!ucModel.parametersFlags.get(MicroControllerModel.EXTERNAL_RAM)) {
+            preparedSQL = String.format("( sram_bytes >= %d ) ", ramUsage);
+        } else {
+            preparedSQL = "( sram_bytes >= 0 )";
+        }
         return preparedSQL;
     }
 
