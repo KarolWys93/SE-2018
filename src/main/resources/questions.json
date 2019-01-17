@@ -22,9 +22,9 @@
     "question" : "Ile potrzebujesz wszystkich pinów I/O (w tym tych do funkcji analogowych)?",
     "answers" : [
       "5 lub mniej",
-      "nie więcej niż 15",
-      "nie więcej niż 20",
-      "więcej niż 20"
+      "więcej niż 5, ale mniej niż 32",
+      "więcej niż 32, ale mniej niż 75",
+      "więcej niż 80"
     ],
     "nextQuestionIds" : [3, 3, 3, 3]
   },
@@ -53,10 +53,11 @@
     "question" : "Ile kanałów ADC potrzebujesz w swoim projekcie?",
     "answers" : [
       "nie potrzebuję wcale",
-      "mniej niż 4",
-      "5 i więcej"
+      "więcej niż 4, ale mniej niż 10",
+      "więcej niż 10, ale mniej niż 16",
+      "więcej niż 16"
     ],
-    "nextQuestionIds" : [8, 7, 7]
+    "nextQuestionIds" : [8, 7, 7, 7]
   },
   {
     "questionID" : 7,
@@ -64,31 +65,30 @@
     "answers" : [
       "8 bit",
       "10 bit",
-      "12 bit",
-      "więcej niż 12 bit"
+      "12 bit"
     ],
-    "nextQuestionIds" : [8, 8, 8, 8]
+    "nextQuestionIds" : [8, 8, 8]
   },
   {
     "questionID" : 8,
     "question" : "Ile kanałów DAC będzie potrzebne?",
     "answers" : [
       "nie potrzebuję wcale",
-      "mniej niż 4",
-      "5 i więcej"
+      "1",
+      "więcej niż 2"
     ],
     "nextQuestionIds" : [10, 9, 9]
   },
   {
     "questionID" : 9,
-    "question" : "Jaka jest wymagana rozdzielczość DAC?",
+    "question" : "Jaka jest wymagana minimalna rozdzielczość DAC?",
     "answers" : [
+      "Mniej niż 8 bit",
       "8 bit",
       "10 bit",
-      "12 bit",
-      "więcej niż 12 bit"
+      "12 bit"
     ],
-    "nextQuestionIds" : [10, 10, 10, 10]
+    "nextQuestionIds" : [10, 10, 10]
   },
   {
     "questionID" : 10,

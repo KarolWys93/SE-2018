@@ -14,7 +14,7 @@
   {
     "rule_id": 2,
     "rules" : {
-      "IO_ports" : [5, 15, 20, -1]
+      "IO_ports" : [0, 5, 32, 75]
     }
   },
   {
@@ -32,25 +32,25 @@
   {
     "rule_id": 5,
     "rules" : {
-      "number_of_adc" : [0, 4, -1]
+      "number_of_adc" : [0, 4, 10, 16]
     }
   },
   {
     "rule_id": 7,
     "rules" : {
-      "adc_resolution" : [8, 19, 12, -1]
+      "adc_resolution" : [8, 19, 12]
     }
   },
   {
     "rule_id": 8,
     "rules" : {
-      "number_of_dac" : [0, 4, -1]
+      "number_of_dac" : [0, 1, 2]
     }
   },
   {
     "rule_id": 9,
     "rules" : {
-      "dac_resolution" : [8, 10, 12, -1]
+      "dac_resolution" : [0, 8, 10, 12]
     }
   },
   {

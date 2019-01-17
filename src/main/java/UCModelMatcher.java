@@ -22,7 +22,7 @@ public class UCModelMatcher {
         return ucList;
     }
 
-    private List<MicroControllerEntity> filterUCBase(MicroControllerModel ucModel){
+    private List<MicroControllerEntity> filterUCBase(MicroControllerModel ucModel) {
         ResultSet resultSet = null;
         String sqlStatement = "SELECT * FROM uc_database WHERE ";
         StringBuilder stringBuilder = new StringBuilder(sqlStatement);
@@ -34,6 +34,12 @@ public class UCModelMatcher {
         stringBuilder.append(prepareVoltageFilter(ucModel));
         stringBuilder.append(" AND ");
         stringBuilder.append(prepareInterfacesFilter(ucModel));
+        stringBuilder.append(" AND ");
+        stringBuilder.append(prepareIOFilter(ucModel));
+        stringBuilder.append(" AND ");
+        stringBuilder.append(prepareADCFilter(ucModel));
+        stringBuilder.append(" AND ");
+        stringBuilder.append(prepareDACFilter(ucModel));
 
         try {
             String statementSQL = stringBuilder.toString();
@@ -51,37 +57,37 @@ public class UCModelMatcher {
         StringBuilder sb = new StringBuilder("( ");
         boolean firstCondition = true;
 
-        if (ucModel.parametersFlags.get(MicroControllerModel.MANUFACTURER_STM)){
+        if (ucModel.parametersFlags.get(MicroControllerModel.MANUFACTURER_STM)) {
             sb.append("manufacturer is \'STM\'");
             firstCondition = false;
         }
 
-        if (ucModel.parametersFlags.get(MicroControllerModel.MANUFACTURER_ATMEL)){
+        if (ucModel.parametersFlags.get(MicroControllerModel.MANUFACTURER_ATMEL)) {
             if (!firstCondition) sb.append(" OR ");
             sb.append("manufacturer is \'ATMEL\'");
             firstCondition = false;
         }
 
-        if (firstCondition){
+        if (firstCondition) {
             sb.append("0");
         }
         sb.append(") ");
         return sb.toString();
     }
 
-    private String preparePackageFilter(MicroControllerModel ucModel){
+    private String preparePackageFilter(MicroControllerModel ucModel) {
         int package_lvl = ucModel.parametersValues.get(MicroControllerModel.UC_PACKAGE);
         StringBuilder sb = new StringBuilder("( package_tht = 1");
 
-        if (package_lvl >= MicroControllerModel.PACKAGE_SIMPLE_SMD){
+        if (package_lvl >= MicroControllerModel.PACKAGE_SIMPLE_SMD) {
             sb.append(" OR package_easy = 1");
         }
 
-        if (package_lvl >= MicroControllerModel.PACKAGE_ADVANCED_SMD){
+        if (package_lvl >= MicroControllerModel.PACKAGE_ADVANCED_SMD) {
             sb.append(" OR package_hard = 1");
         }
 
-        if (package_lvl >= MicroControllerModel.PACKAGE_BGA){
+        if (package_lvl >= MicroControllerModel.PACKAGE_BGA) {
             sb.append(" OR package_bga = 1");
         }
 
@@ -89,16 +95,16 @@ public class UCModelMatcher {
         return sb.toString();
     }
 
-    private String prepareVoltageFilter(MicroControllerModel ucModel){
+    private String prepareVoltageFilter(MicroControllerModel ucModel) {
         int optimalVoltage = ucModel.parametersValues.get(MicroControllerModel.OPTIMAL_VOLTAGE);
         int minimalVoltage = ucModel.parametersValues.get(MicroControllerModel.MINIMAL_VOLTAGE);
-        if (minimalVoltage > optimalVoltage){
+        if (minimalVoltage > optimalVoltage) {
             minimalVoltage = optimalVoltage;
         }
         return String.format("( voltage_min <= %d AND voltage_max >= %d ) ", minimalVoltage, optimalVoltage);
     }
 
-    private String prepareInterfacesFilter(MicroControllerModel ucModel){
+    private String prepareInterfacesFilter(MicroControllerModel ucModel) {
         StringBuilder sb = new StringBuilder("( ");
         sb.append(String.format("UART >= %d AND SPI >= %d AND I2C >= %d AND CAN >= %d",
                 ucModel.parametersValues.get(MicroControllerModel.UART_INTERFACES),
@@ -107,12 +113,51 @@ public class UCModelMatcher {
                 ucModel.parametersValues.get(MicroControllerModel.CAN_INTERFACES)
         ));
 
-        if (ucModel.parametersFlags.get(MicroControllerModel.USB_INTERFACES)){
+        if (ucModel.parametersFlags.get(MicroControllerModel.USB_INTERFACES)) {
             sb.append(" AND USB >= 1");
         }
 
         sb.append(") ");
         return sb.toString();
+    }
+
+    private String prepareIOFilter(MicroControllerModel ucModel) {
+        String preparedSQL = null;
+        int minimalIO = ucModel.parametersValues.get(MicroControllerModel.IO_PORTS_NUMBER);
+        if (!ucModel.parametersFlags.get(MicroControllerModel.IO_EXPANDERS)) {
+            preparedSQL = String.format("( pin_count >= %d ) ", minimalIO);
+        } else {
+            preparedSQL = "( pin_count >= 0 )";
+        }
+        return preparedSQL;
+    }
+
+    private String prepareADCFilter(MicroControllerModel ucModel) {
+        int numberOfADC = ucModel.parametersValues.get(MicroControllerModel.ADC_NUMBER);
+        int resolutionOfADC = ucModel.parametersValues.get(MicroControllerModel.ADC_RESOLUTION);
+        String preparedSQL;
+
+        if (numberOfADC > 0) {
+            preparedSQL = String.format(" ( ADC_input >= %d AND ADC_resolution >= %d ) ", numberOfADC, resolutionOfADC);
+        } else {
+            preparedSQL = " ( ADC_input >= 0 ) ";
+        }
+
+        return preparedSQL;
+    }
+
+    private String prepareDACFilter(MicroControllerModel ucModel){
+        int numberOfDAC = ucModel.parametersValues.get(MicroControllerModel.DAC_NUMBER);
+        int resolutionOfDAC = ucModel.parametersValues.get(MicroControllerModel.DAC_RESOLUTION);
+        String preparedSQL;
+
+        if (numberOfDAC >= 1 && (resolutionOfDAC > 0 )) {
+            preparedSQL = String.format(" ( DAC_output >= %d AND DAC_resolution >= %d ) ", numberOfDAC, resolutionOfDAC);
+        } else {
+            preparedSQL = " ( DAC_output >= 0 ) ";
+        }
+
+        return preparedSQL;
     }
 
 }
