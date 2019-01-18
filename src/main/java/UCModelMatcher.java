@@ -44,6 +44,8 @@ public class UCModelMatcher {
         stringBuilder.append(prepareFlashFilter(ucModel));
         stringBuilder.append(" AND ");
         stringBuilder.append(prepareSramFilter(ucModel));
+        stringBuilder.append(" AND ");
+        stringBuilder.append(prepareCountersFilter(ucModel));
 
         try {
             String statementSQL = stringBuilder.toString();
@@ -169,6 +171,10 @@ public class UCModelMatcher {
             preparedSQL = "( sram_bytes >= 0 )";
         }
         return preparedSQL;
+    }
+
+    private String prepareCountersFilter(MicroControllerModel ucModel) {
+        return String.format(" ( counters >= %d ) ", ucModel.parametersValues.get(MicroControllerModel.COUNTERS));
     }
 
 }
