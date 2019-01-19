@@ -19,7 +19,105 @@ public class UCModelMatcher {
     public List<MicroControllerEntity> matchUCModel(MicroControllerModel ucModel) {
         List<MicroControllerEntity> ucList = filterUCBase(ucModel);
 
+        ucList.sort((uc1, uc2) -> compareUC(uc1, uc2, ucModel));
+
         return ucList;
+    }
+
+    private int compareUC(MicroControllerEntity uc1, MicroControllerEntity uc2, MicroControllerModel ucModel) {
+        int uc1Points = 0;
+        int uc2Points = 0;
+
+        //price
+        if (uc1.getPrice() < uc2.getPrice()) {
+            uc1Points += ucModel.parametersFlags.get(MicroControllerModel.SMALL_SERIES) ? 1 : 2;
+        }
+        if (uc1.getPrice() > uc2.getPrice()) {
+            uc2Points += ucModel.parametersFlags.get(MicroControllerModel.SMALL_SERIES) ? 1 : 2;
+        }
+
+        //power consumption
+        if (ucModel.parametersFlags.get(MicroControllerModel.POWER_SAVING)) {
+            uc1Points += (uc1.getPower_consumption() < uc2.getPower_consumption()) ? 1 : 0;
+            uc2Points += (uc1.getPower_consumption() > uc2.getPower_consumption()) ? 1 : 0;
+        }
+
+        //OS support
+        if (ucModel.parametersFlags.get(MicroControllerModel.OS_SUPPORT)) {
+            uc1Points += uc1.getManufacturer().equals("STM") ? 1 : 0;
+            uc2Points += uc2.getManufacturer().equals("STM") ? 1 : 0;
+        }
+
+        //graphics features support
+        if (ucModel.parametersFlags.get(MicroControllerModel.GRAPHICS_FEATURES)) {
+            uc1Points += uc1.getGraphics_support() > 0 ? 1 : 0;
+            uc2Points += uc2.getGraphics_support() > 0 ? 1 : 0;
+        }
+
+        //performance
+        if (ucModel.parametersFlags.get(MicroControllerModel.HIGH_PERFORMANCE)) {
+            uc1Points += (uc1.getCpu_speed() > uc2.getCpu_speed()) ? 1 : 0;
+            uc2Points += (uc1.getCpu_speed() < uc2.getCpu_speed()) ? 1 : 0;
+        }
+        if (ucModel.parametersFlags.get(MicroControllerModel.FPU)) {
+            uc1Points += uc1.getFPU() > 0 ? 1 : 0;
+            uc2Points += uc2.getFPU() > 0 ? 1 : 0;
+        }
+
+        //IO
+        if (ucModel.parametersFlags.get(MicroControllerModel.IO_EXPANDERS)) {
+            if (uc1.getPin_count() >= ucModel.parametersValues.get(MicroControllerModel.IO_PORTS_NUMBER)) {
+                uc1Points += 2;
+            } else if (uc1.getPin_count() >= ucModel.parametersValues.get(MicroControllerModel.IO_PORTS_NUMBER) * 0.5f) {
+                uc1Points += 1;
+            }
+            if (uc2.getPin_count() >= ucModel.parametersValues.get(MicroControllerModel.IO_PORTS_NUMBER)) {
+                uc2Points += 2;
+            } else if (uc2.getPin_count() >= ucModel.parametersValues.get(MicroControllerModel.IO_PORTS_NUMBER) * 0.5f) {
+                uc2Points += 1;
+            }
+        } else {
+            uc1Points += (uc1.getPin_count() < uc2.getPin_count()) ? 1 : 0;
+            uc2Points += (uc1.getPin_count() > uc2.getPin_count()) ? 1 : 0;
+        }
+
+        //RAM
+        if (ucModel.parametersFlags.get(MicroControllerModel.EXTERNAL_RAM)) {
+            uc1Points += uc1.getExternal_ram_support() > 0 ? 1 : 0;
+            uc2Points += uc2.getExternal_ram_support() > 0 ? 1 : 0;
+        } else {
+            uc1Points += (uc1.getSram_bytes() > uc2.getSram_bytes()) ? 1 : 0;
+            uc2Points += (uc1.getSram_bytes() < uc2.getSram_bytes()) ? 1 : 0;
+        }
+
+        //DAC - using "handmade" DAC
+        int numberOfDAC = ucModel.parametersValues.get(MicroControllerModel.DAC_NUMBER);
+        int resolutionOfDAC = ucModel.parametersValues.get(MicroControllerModel.DAC_RESOLUTION);
+
+        if (uc1.getDAC_output() >= numberOfDAC) {
+            uc1Points += 2;
+        } else if ((numberOfDAC - uc1.getDAC_output() == 1) && resolutionOfDAC <= 8) {
+            if (uc1.getPin_count() > ucModel.parametersValues.get(MicroControllerModel.IO_PORTS_NUMBER) + 10) {
+                uc1Points += 1;
+            }
+        }
+        if (uc2.getDAC_output() >= numberOfDAC) {
+            uc2Points += 2;
+        } else if ((numberOfDAC - uc2.getDAC_output() == 1) && resolutionOfDAC <= 8) {
+            if (uc2.getPin_count() > ucModel.parametersValues.get(MicroControllerModel.IO_PORTS_NUMBER) + 10) {
+                uc2Points += 1;
+            }
+        }
+
+
+        System.out.println(String.format("%s vs %s -> %d:%d",
+                uc1.getProduct_name(),
+                uc2.getProduct_name(),
+                uc1Points,
+                uc2Points
+        ));
+
+        return uc2Points - uc1Points;   //The first should be the one with more points.
     }
 
     private List<MicroControllerEntity> filterUCBase(MicroControllerModel ucModel) {
