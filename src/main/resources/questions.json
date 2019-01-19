@@ -145,15 +145,6 @@
       "tak",
       "nie"
     ],
-    "nextQuestionIds" : [16, 16]
-  },
-  {
-    "questionID" : 16,
-    "question" : "Czy mikrokontroler będzie wykorzystywany do cyfrowego przetwarzania sygnałów?",
-    "answers" : [
-      "tak",
-      "nie"
-    ],
     "nextQuestionIds" : [17, 17]
   },
   {

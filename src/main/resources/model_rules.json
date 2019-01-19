@@ -91,12 +91,6 @@
     }
   },
   {
-    "rule_id": 16,
-    "rules" : {
-      "high_performance" : [true, null]
-    }
-  },
-  {
     "rule_id": 17,
     "rules" : {
       "high_performance" : [null, null, true],

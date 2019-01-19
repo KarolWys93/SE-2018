@@ -30,10 +30,10 @@ public class UCModelMatcher {
 
         //price
         if (uc1.getPrice() < uc2.getPrice()) {
-            uc1Points += ucModel.parametersFlags.get(MicroControllerModel.SMALL_SERIES) ? 1 : 2;
+            uc1Points += ucModel.parametersFlags.get(MicroControllerModel.SMALL_SERIES) ? 2 : 4;
         }
         if (uc1.getPrice() > uc2.getPrice()) {
-            uc2Points += ucModel.parametersFlags.get(MicroControllerModel.SMALL_SERIES) ? 1 : 2;
+            uc2Points += ucModel.parametersFlags.get(MicroControllerModel.SMALL_SERIES) ? 2 : 4;
         }
 
         //power consumption
@@ -60,35 +60,56 @@ public class UCModelMatcher {
             uc2Points += (uc1.getCpu_speed() < uc2.getCpu_speed()) ? 1 : 0;
         }
         if (ucModel.parametersFlags.get(MicroControllerModel.FPU)) {
-            uc1Points += uc1.getFPU() > 0 ? 1 : 0;
-            uc2Points += uc2.getFPU() > 0 ? 1 : 0;
+            uc1Points += uc1.getFPU() > 0 ? 2 : 0;
+            uc2Points += uc2.getFPU() > 0 ? 2 : 0;
         }
 
         //IO
         if (ucModel.parametersFlags.get(MicroControllerModel.IO_EXPANDERS)) {
             if (uc1.getPin_count() >= ucModel.parametersValues.get(MicroControllerModel.IO_PORTS_NUMBER)) {
-                uc1Points += 2;
+                if (uc1.getPin_count() >= ucModel.parametersValues.get(MicroControllerModel.IO_PORTS_NUMBER) * 1.75f){
+                    uc1Points += 1;
+                }
+                else {
+                    uc1Points += 2;
+                }
             } else if (uc1.getPin_count() >= ucModel.parametersValues.get(MicroControllerModel.IO_PORTS_NUMBER) * 0.5f) {
                 uc1Points += 1;
             }
+
             if (uc2.getPin_count() >= ucModel.parametersValues.get(MicroControllerModel.IO_PORTS_NUMBER)) {
-                uc2Points += 2;
+                if (uc2.getPin_count() >= ucModel.parametersValues.get(MicroControllerModel.IO_PORTS_NUMBER) * 1.75f){
+                    uc2Points += 1;
+                }
+                else {
+                    uc2Points += 2;
+                }
             } else if (uc2.getPin_count() >= ucModel.parametersValues.get(MicroControllerModel.IO_PORTS_NUMBER) * 0.5f) {
                 uc2Points += 1;
             }
+
+
         } else {
-            uc1Points += (uc1.getPin_count() < uc2.getPin_count()) ? 1 : 0;
-            uc2Points += (uc1.getPin_count() > uc2.getPin_count()) ? 1 : 0;
+            if (uc1.getPin_count() >= ucModel.parametersValues.get(MicroControllerModel.IO_PORTS_NUMBER) * 1.75f){
+                uc1Points += (uc1.getPin_count() > uc2.getPin_count()) ? 1 : 0;
+            }else {
+                uc1Points += (uc1.getPin_count() > uc2.getPin_count()) ? 2 : 1;
+            }
+            if (uc2.getPin_count() >= ucModel.parametersValues.get(MicroControllerModel.IO_PORTS_NUMBER) * 1.75f){
+                uc2Points += (uc1.getPin_count() < uc2.getPin_count()) ? 1 : 0;
+            }else {
+                uc2Points += (uc1.getPin_count() < uc2.getPin_count()) ? 2 : 1;
+            }
         }
 
         //RAM
         if (ucModel.parametersFlags.get(MicroControllerModel.EXTERNAL_RAM)) {
             uc1Points += uc1.getExternal_ram_support() > 0 ? 1 : 0;
             uc2Points += uc2.getExternal_ram_support() > 0 ? 1 : 0;
-        } else {
-            uc1Points += (uc1.getSram_bytes() > uc2.getSram_bytes()) ? 1 : 0;
-            uc2Points += (uc1.getSram_bytes() < uc2.getSram_bytes()) ? 1 : 0;
         }
+        uc1Points += (uc1.getSram_bytes() > uc2.getSram_bytes()) ? 1 : 0;
+        uc2Points += (uc1.getSram_bytes() < uc2.getSram_bytes()) ? 1 : 0;
+
 
         //DAC - using "handmade" DAC
         int numberOfDAC = ucModel.parametersValues.get(MicroControllerModel.DAC_NUMBER);
@@ -247,7 +268,7 @@ public class UCModelMatcher {
         int resolutionOfDAC = ucModel.parametersValues.get(MicroControllerModel.DAC_RESOLUTION);
         String preparedSQL;
 
-        if (numberOfDAC >= 1 && (resolutionOfDAC > 0)) {
+        if (numberOfDAC >= 1 && (resolutionOfDAC > 8)) {
             preparedSQL = String.format(" ( DAC_output >= %d AND DAC_resolution >= %d ) ", numberOfDAC, resolutionOfDAC);
         } else {
             preparedSQL = " ( DAC_output >= 0 ) ";
