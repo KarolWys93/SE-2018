@@ -64,8 +64,8 @@ public class Main {
             } catch (Exception ex) {
                 SwingUtilities.invokeLater(() -> {
                     preparingDialog.setVisible(false);
-                    JOptionPane.showMessageDialog(null, ex.toString() , "Błąd!", JOptionPane.ERROR_MESSAGE);
-                    System.exit(0);
+                    JOptionPane.showMessageDialog(null, ex.toString(), "Błąd uruchamiania!", JOptionPane.ERROR_MESSAGE);
+                    System.exit(1);
                 });
             }
         });

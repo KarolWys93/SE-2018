@@ -7,6 +7,7 @@ import jdk.nashorn.api.scripting.URLReader;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.io.*;
+import java.sql.SQLException;
 import java.util.List;
 
 public class MainFrame extends JFrame {
@@ -37,7 +38,13 @@ public class MainFrame extends JFrame {
     private void searchUC(MicroControllerModel ucModel) {
         System.out.println(ucModel.toString());
         Database db = new Database();
-        db.init();
+        try {
+            db.init();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.toString(), "Błąd bazy danych", JOptionPane.ERROR_MESSAGE);
+            System.exit(1);
+        }
         UCModelMatcher matcher = new UCModelMatcher(db.getConnection());
 
         List<MicroControllerEntity> ucList = matcher.matchUCModel(ucModel);

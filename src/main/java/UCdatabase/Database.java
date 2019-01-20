@@ -7,14 +7,10 @@ public class Database {
     private String connectionString = "jdbc:sqlite:data/ucDatabase.db";
     private Connection connection;
 
-    public void init() {
-        try {
+    public void init() throws SQLException {
             connection = DriverManager.getConnection(connectionString);
             System.out.println("Connection to SQLite has been established");
             createTable();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
     }
 
     public Connection getConnection() {

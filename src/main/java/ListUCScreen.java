@@ -54,8 +54,7 @@ public class ListUCScreen extends JDialog {
             statement.execute();
             ucList = UCDatabaseDAO.rowsToObject(statement.getResultSet());
             db.closeDB();
-        } catch (
-                SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 
