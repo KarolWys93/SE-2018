@@ -62,13 +62,6 @@ public class UCModelMatcher {
             float pointsUC2 = calculatePoints((MicroControllerEntity) uc2);
 
 
-            System.out.println(String.format("%s vs %s -> %f:%f",
-                    ((MicroControllerEntity) uc1).getProduct_name(),
-                    ((MicroControllerEntity) uc2).getProduct_name(),
-                    pointsUC1,
-                    pointsUC2
-            ));
-
             if (pointsUC2 - pointsUC1 > 0) {
                 return 1;
             } else if (pointsUC2 - pointsUC1 < 0) {
