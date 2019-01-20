@@ -26,36 +26,11 @@ public class MainFrame extends JFrame {
     public MainFrame(String title) {
         super(title);
 
-
         loadKnowledgeBase();
-
-        ucModelGenerator = new UCModelGenerator(questions, modelRules);
 
         StartScreen startScreen = new StartScreen();
         startPanel = startScreen.getStartPanel();
         startScreen.addStartListener(this::startDoingThings);
-
-        questionScreen = new QuestionScreen();
-
-        questionScreen.setQuestionListener((nextQuestion, selectedQuestion) -> {
-            ucModelGenerator.setAnswerForLastQuestion(selectedQuestion);
-            IQuestionModel question = null;
-            if (nextQuestion) {
-                question = ucModelGenerator.getNextQuestion();
-                if (question != null) {
-                    questionScreen.setQuestionModel(question);
-                } else {
-                    searchUC(ucModelGenerator.generateModel());
-                }
-
-            } else {
-                question = ucModelGenerator.getPreviousQuestion();
-                if (question != null) {
-                    questionScreen.setQuestionModel(question);
-                }
-            }
-        });
-
         setContentPane(startPanel);
     }
 
@@ -70,6 +45,13 @@ public class MainFrame extends JFrame {
         System.out.println(ucList);
 
         resultsScreen = new ResultsScreen(ucList);
+        resultsScreen.setNavigationScreenListener(buttonID -> {
+            if (buttonID == ResultsScreen.ScreenNavigationListener.NEXT_BUTTON){
+                setContentPane(startPanel);
+            }else {
+                setContentPane(questionsPanel);
+            }
+        });
 
         setContentPane(resultsScreen.getResultPanel());
         resultsScreen.getResultPanel().updateUI();
@@ -109,6 +91,31 @@ public class MainFrame extends JFrame {
 
     private void startDoingThings(ActionEvent event) {
         System.out.println("Start expert's stuff");
+
+        questionScreen = new QuestionScreen();
+        ucModelGenerator = new UCModelGenerator(questions, modelRules);
+
+        questionScreen.setQuestionListener((nextQuestion, selectedQuestion) -> {
+            ucModelGenerator.setAnswerForLastQuestion(selectedQuestion);
+            IQuestionModel question;
+            if (nextQuestion) {
+                question = ucModelGenerator.getNextQuestion();
+                if (question != null) {
+                    questionScreen.setQuestionModel(question);
+                } else {
+                    searchUC(ucModelGenerator.generateModel());
+                }
+
+            } else {
+                question = ucModelGenerator.getPreviousQuestion();
+                if (question != null) {
+                    questionScreen.setQuestionModel(question);
+                }else {
+                    setContentPane(startPanel);
+                }
+            }
+        });
+
         questionsPanel = questionScreen.getQuestionPanel();
         questionScreen.setQuestionModel(ucModelGenerator.getNextQuestion());
         setContentPane(questionsPanel);
