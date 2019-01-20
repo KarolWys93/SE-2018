@@ -16,6 +16,7 @@ public class MainFrame extends JFrame {
     private JPanel questionsPanel;
 
     private QuestionScreen questionScreen;
+    private ResultsScreen resultsScreen;
 
     private List<IQuestionModel> questions;
     private List<MicroControllerModelRule> modelRules;
@@ -67,6 +68,11 @@ public class MainFrame extends JFrame {
         List<MicroControllerEntity> ucList = matcher.matchUCModel(ucModel);
 
         System.out.println(ucList);
+
+        resultsScreen = new ResultsScreen(ucList);
+
+        setContentPane(resultsScreen.getResultPanel());
+        resultsScreen.getResultPanel().updateUI();
 
         JOptionPane.showMessageDialog(null,
                 "Znaleziono mikrokontrolerów: " + ucList.size(),
