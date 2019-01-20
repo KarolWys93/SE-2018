@@ -48,8 +48,10 @@ public class MainFrame extends JFrame {
         resultsScreen.setNavigationScreenListener(buttonID -> {
             if (buttonID == ResultsScreen.ScreenNavigationListener.NEXT_BUTTON){
                 setContentPane(startPanel);
+                startPanel.updateUI();
             }else {
                 setContentPane(questionsPanel);
+                questionsPanel.updateUI();
             }
         });
 
@@ -112,6 +114,7 @@ public class MainFrame extends JFrame {
                     questionScreen.setQuestionModel(question);
                 }else {
                     setContentPane(startPanel);
+                    startPanel.updateUI();
                 }
             }
         });

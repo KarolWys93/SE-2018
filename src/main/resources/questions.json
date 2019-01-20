@@ -159,7 +159,7 @@
   },
   {
     "questionID" : 18,
-    "question" : "Jakie będzie szacunkowe maksymalne zużycie pamięci RAM w Twojej aplikacji? (nie wliczając ewentualnego zewnętrznego ramu)",
+    "question" : "Jakie będzie szacunkowe maksymalne zużycie pamięci RAM w Twojej aplikacji? (nie wliczając ewentualnego zewnętrznego RAMu)",
     "answers" : [
       "nie więcej niż 1 Kb",
       "nie więcej niż 4 Kb",
@@ -171,7 +171,7 @@
   },
   {
     "questionID" : 19,
-    "question" : "Czy przewidujesz użycie zewnętrznego ramu?",
+    "question" : "Czy przewidujesz użycie zewnętrznego RAMu?",
     "answers" : [
       "tak",
       "nie"
@@ -253,7 +253,7 @@
   },
   {
     "questionID" : 28,
-    "question" : "Czy proces technologiczny umożliwia Ci wykorzystanie elementów w obudowach takich jak BGA czy QFN",
+    "question" : "Czy proces technologiczny umożliwia Ci wykorzystanie elementów w obudowach takich jak BGA czy QFN?",
     "answers" : [
       "mogę używać tylko układów w prostych obudowach SMD",
       "obudowy QFN nie stanowią problemu",
