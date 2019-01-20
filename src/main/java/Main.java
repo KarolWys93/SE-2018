@@ -47,19 +47,27 @@ public class Main {
 
         ExecutorService executor = Executors.newFixedThreadPool(1);
         executor.execute(() -> {
-            Database database = new Database();
-            database.init();
-            UCDatabaseDAO ucDao = new UCDatabaseDAO(database.getConnection());
-            if (ucDao.tableSize() == 0) {
-                List<MicroControllerEntity> list = CSVloader.loadCSV(Paths.get("./data/ucBase.csv"));
-                int addedUC = ucDao.insertAll(list);
-                System.out.println("added do db: " + addedUC);
+            try {
+                Database database = new Database();
+                database.init();
+                UCDatabaseDAO ucDao = new UCDatabaseDAO(database.getConnection());
+                if (ucDao.tableSize() == 0) {
+                    List<MicroControllerEntity> list = CSVloader.loadCSV(Paths.get("./data/ucBase.csv"));
+                    int addedUC = ucDao.insertAll(list);
+                    System.out.println("added do db: " + addedUC);
+                }
+                database.closeDB();
+                SwingUtilities.invokeLater(() -> {
+                    preparingDialog.setVisible(false);
+                    frame.setVisible(true);
+                });
+            } catch (Exception ex) {
+                SwingUtilities.invokeLater(() -> {
+                    preparingDialog.setVisible(false);
+                    JOptionPane.showMessageDialog(null, ex.toString() , "Błąd!", JOptionPane.ERROR_MESSAGE);
+                    System.exit(0);
+                });
             }
-            database.closeDB();
-            SwingUtilities.invokeLater(() -> {
-                preparingDialog.setVisible(false);
-                frame.setVisible(true);
-            });
         });
     }
 

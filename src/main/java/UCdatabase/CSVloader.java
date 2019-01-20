@@ -46,60 +46,56 @@ public class CSVloader {
     public static final String PACKAGE_BGA = "package_bga";
 
 
-    public static List<MicroControllerEntity> loadCSV(Path filePath) {
+    public static List<MicroControllerEntity> loadCSV(Path filePath) throws IOException {
         List<MicroControllerEntity> ucList = new ArrayList<>();
 
         Map<String, Integer> headers;
-        try {
-            Stream<String> lines = Files.lines(filePath);
-            Iterator<String> iterator = lines.iterator();
-            headers = parseHeader(iterator.next());
+        Stream<String> lines = Files.lines(filePath);
+        Iterator<String> iterator = lines.iterator();
+        headers = parseHeader(iterator.next());
 
-            iterator.forEachRemaining(s -> {
+        iterator.forEachRemaining(s -> {
 
-                String[] fields = fixSplitForStringWithComa(s.split(","));
-                MicroControllerEntity ucEntity = new MicroControllerEntity(
-                        fields[headers.get(MANUFACTURER)],
-                        fields[headers.get(PRODUCT_NAME)],
-                        Float.valueOf(fields[headers.get(PRICE)]),
-                        fields[headers.get(CORE)],
-                        Integer.valueOf(fields[headers.get(FLASH)]),
-                        Integer.valueOf(fields[headers.get(SRAM)]),
-                        Integer.valueOf(fields[headers.get(PIN)]),
-                        Integer.valueOf(fields[headers.get(CPU_SPEED)]),
-                        Integer.valueOf(fields[headers.get(COMPARATORS)]),
-                        Integer.valueOf(fields[headers.get(ADC_INPUT)]),
-                        Integer.valueOf(fields[headers.get(ADC_RES)]),
-                        Integer.valueOf(fields[headers.get(DAC_OUTPUT)]),
-                        Integer.valueOf(fields[headers.get(DAC_RES)]),
-                        Integer.valueOf(fields[headers.get(COUNTERS)]),
-                        Integer.valueOf(fields[headers.get(UART)]),
-                        Integer.valueOf(fields[headers.get(SPI)]),
-                        Integer.valueOf(fields[headers.get(I2C)]),
-                        Integer.valueOf(fields[headers.get(CAN)]),
-                        Integer.valueOf(fields[headers.get(USB)]),
-                        Integer.valueOf(fields[headers.get(TEMP_MIN)]),
-                        Integer.valueOf(fields[headers.get(TEMP_MAX)]),
-                        Integer.valueOf(fields[headers.get(VOLTAGE_MIN)]),
-                        Integer.valueOf(fields[headers.get(VOLTAGE_MAX)]),
-                        Float.valueOf(fields[headers.get(POWER_CONSUMPTION)]),
-                        Integer.valueOf(fields[headers.get(FPU)]),
-                        Integer.valueOf(fields[headers.get(GRAPHICS_SUPPORT)]),
-                        Integer.valueOf(fields[headers.get(EXTERNAL_RAM)]),
-                        fields[headers.get(PARALEL_INTERFACES)],
-                        fields[headers.get(SERIAL_INTERFACES)],
-                        fields[headers.get(DESCRIPTION)],
-                        fields[headers.get(PACKAGES)],
-                        Integer.valueOf(fields[headers.get(PACKAGE_THT)]),
-                        Integer.valueOf(fields[headers.get(PACKAGE_EASY)]),
-                        Integer.valueOf(fields[headers.get(PACKAGE_HARD)]),
-                        Integer.valueOf(fields[headers.get(PACKAGE_BGA)])
-                );
-                ucList.add(ucEntity);
-            });
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+            String[] fields = fixSplitForStringWithComa(s.split(","));
+            MicroControllerEntity ucEntity = new MicroControllerEntity(
+                    fields[headers.get(MANUFACTURER)],
+                    fields[headers.get(PRODUCT_NAME)],
+                    Float.valueOf(fields[headers.get(PRICE)]),
+                    fields[headers.get(CORE)],
+                    Integer.valueOf(fields[headers.get(FLASH)]),
+                    Integer.valueOf(fields[headers.get(SRAM)]),
+                    Integer.valueOf(fields[headers.get(PIN)]),
+                    Integer.valueOf(fields[headers.get(CPU_SPEED)]),
+                    Integer.valueOf(fields[headers.get(COMPARATORS)]),
+                    Integer.valueOf(fields[headers.get(ADC_INPUT)]),
+                    Integer.valueOf(fields[headers.get(ADC_RES)]),
+                    Integer.valueOf(fields[headers.get(DAC_OUTPUT)]),
+                    Integer.valueOf(fields[headers.get(DAC_RES)]),
+                    Integer.valueOf(fields[headers.get(COUNTERS)]),
+                    Integer.valueOf(fields[headers.get(UART)]),
+                    Integer.valueOf(fields[headers.get(SPI)]),
+                    Integer.valueOf(fields[headers.get(I2C)]),
+                    Integer.valueOf(fields[headers.get(CAN)]),
+                    Integer.valueOf(fields[headers.get(USB)]),
+                    Integer.valueOf(fields[headers.get(TEMP_MIN)]),
+                    Integer.valueOf(fields[headers.get(TEMP_MAX)]),
+                    Integer.valueOf(fields[headers.get(VOLTAGE_MIN)]),
+                    Integer.valueOf(fields[headers.get(VOLTAGE_MAX)]),
+                    Float.valueOf(fields[headers.get(POWER_CONSUMPTION)]),
+                    Integer.valueOf(fields[headers.get(FPU)]),
+                    Integer.valueOf(fields[headers.get(GRAPHICS_SUPPORT)]),
+                    Integer.valueOf(fields[headers.get(EXTERNAL_RAM)]),
+                    fields[headers.get(PARALEL_INTERFACES)],
+                    fields[headers.get(SERIAL_INTERFACES)],
+                    fields[headers.get(DESCRIPTION)],
+                    fields[headers.get(PACKAGES)],
+                    Integer.valueOf(fields[headers.get(PACKAGE_THT)]),
+                    Integer.valueOf(fields[headers.get(PACKAGE_EASY)]),
+                    Integer.valueOf(fields[headers.get(PACKAGE_HARD)]),
+                    Integer.valueOf(fields[headers.get(PACKAGE_BGA)])
+            );
+            ucList.add(ucEntity);
+        });
         return ucList;
     }
 
@@ -112,17 +108,17 @@ public class CSVloader {
         return headersMap;
     }
 
-    private static String[] fixSplitForStringWithComa(String[] splited){
+    private static String[] fixSplitForStringWithComa(String[] splited) {
         ArrayList<String> fixed = new ArrayList<>();
         int startString = -1;
 
         for (int i = 0; i < splited.length; i++) {
             String s = splited[i];
-            if (s.startsWith("\"") && !s.endsWith("\"")){
+            if (s.startsWith("\"") && !s.endsWith("\"")) {
                 startString = i;
-            }else if (!s.startsWith("\"") && s.endsWith("\"")){
+            } else if (!s.startsWith("\"") && s.endsWith("\"")) {
                 String newString = splited[startString];
-                for (int j = startString+1; j <= i; j++) {
+                for (int j = startString + 1; j <= i; j++) {
                     newString = String.join(", ", newString, splited[j]);
                 }
                 fixed.add(newString);
@@ -138,7 +134,7 @@ public class CSVloader {
     }
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         Path filePath = Paths.get("pre-data/ucBase.csv");
         List<MicroControllerEntity> ucList = loadCSV(filePath);
